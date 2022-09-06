@@ -8,10 +8,10 @@ With the help of a Data Science Professor and fellow students, we are creating t
 ## Table of Contents <img src="https://github.com/krisdev-h/data-project-society-logo/blob/eb085a79c0a64415400f3520168e3ad56f4b4642/extraneous%20image%201.png" width="60" height="60">
 
 
-* Brainstorming
-* Implementation
-* Refining
-* End Product
+- Brainstorming
+- Implementation
+- Refining
+- End Product
 
 
 ### Brainstorming
@@ -20,13 +20,23 @@ Looking into RStudio visualizations, I decided that a heat map would be suitable
 <pre>
 <b>Heatmaps</b>: Represented as a heatmap() function in RStudio, heatmaps are graphical representations of data that use 
 colors to visualize the values of the given matrix
-* brighter colors represent common values/higher activity
-* darker colors represent less common values/less activity
+- brighter colors represent common values/higher activity
+- darker colors represent less common values/less activity
+- dendograms: along the side of the heatmap, show how variables and rows are independently clustered
+- heatmaps show data values for each row and column (possibly standardized into the same range)
+- patterns in heatmaps can indicate an association between rows and columns
+- you can modify and create patterns in a heatmap by clustering
+- a rectangular area of around the same colors in a heatmap suggests that a group of rows are 
+  correlated for the corresponding group of columns
 </pre>
 
 <pre>
 <b>Examples of heatmaps</b>: 
-1. set.seed(110) #a pseudorandom number generator, in this case 110 numbers
+1. <ins>FROM A RANDOM DATASET</ins>
+   
+   <a href="https://www.geeksforgeeks.org/create-a-heatmap-in-r-programming-heatmap-function/">source<a>
+   
+   set.seed(110) #a pseudorandom number generator, in this case 110 numbers
    data <- matrix(rnorm(100, 0, 5), nrow = 10, ncol = 10) #data object with matrix assigned
    #100 represents n values in rnorm(n, mean, sd) which generates a vector of normally 
    distributed random numbers
@@ -43,6 +53,65 @@ colors to visualize the values of the given matrix
    heatmap(data, col = my_colors(100)) 
 
    <img src="https://github.com/krisdev-h/data-project-society-logo/blob/260e5e5c65221a084276e1dd0e1bd1d424487f5d/Ex%201%20heatmap%20%232.png" width="250" height="250">
+   
+2. <ins>FROM THE MTCARS DATASET</ins>
+
+   <a href="https://r-graph-gallery.com/215-the-heatmap-function.html">source<a>
+
+   - as.matrix() converts a data frame into a matrix, which is required as input for heatmap()
+   - t(data) transposes the matrix by switching the X and Y axis
+   - column is variable, observation is row, square is value
+   
+   data <- as.matrix(mtcars) #converting mtcars dataset into a matrix
+   heatmap(data) #generating a default heatmap
+   
+   <img src="https://github.com/krisdev-h/data-project-society-logo/blob/9957825d6c12f38aa67ed67032f5362eeb5f8995/Ex%202%20heatmap%20%231.png" width="250" height="250"> * variation is absorbed by hp and disp variables which have high values
+   
+   - therefore we need to normalize the matrix: scaling either the row or column within the heatmap function
+   
+   heatmap(data, scale="column") #want to absorb variation through column
+   
+   - heatmap() automatically:
+        * reorders variables and observations through a clustering algorithm: ordering the distance between each pair
+          of rows and columns by similarities
+        * maps corresponding dendogram lines: diagrams that show the hierarchical relationship between objects
+   - use Rowv and Colv to visualize the raw matrix without reordering or dendogram
+   
+   heatmap(data, Rowv = NA, Colv = NA, scale="column")
+   
+   <img src="https://github.com/krisdev-h/data-project-society-logo/blob/7c869b1add5b35190b78a6781bfe308b07fe37c6/Ex%202%20heatmap%20%233.png" width="230" height="230">
+   
+  - customizing the color palette
+       * R palettes: terrain.color(n colors), rainbow(n colors), heat.colors(n colors), 
+                     topo.colors(n colors), cm.colors(n colors)
+       -> heatmap(data, scale="column", col = cm.colors(256))
+       -> heatmap(data, scale="column", col = terrain.colors(256))
+       * RColorBrewer: 1. sequential palettes: progress from low (light colors) to high (dark colors) 
+                          <img src="https://github.com/krisdev-h/data-project-society-logo/blob/1e2901e6082cdbad9d4808177ce2ff0b02c8a448/Ex%202%20heatmap%20%234.png" width="250" height="160">
+                       2. diverging palettes: put equal emphasis on mid-range and extreme values at both ends 
+                       of the data range, middle break in legend is light colors, low and high extremes is dark colors 
+                       with contrasting hues 
+                          <img src="https://github.com/krisdev-h/data-project-society-logo/blob/7bf06c71c95cad17245fe531f758cd7a840fee45/Ex%202%20heatmap%20%235.png" width="280" height="80">
+                       3. qualitative palettes: uses hues for primary differences in nominal or
+                       categorical data, don't imply differences between legend classes
+                          <img src="https://github.com/krisdev-h/data-project-society-logo/blob/1e2901e6082cdbad9d4808177ce2ff0b02c8a448/Ex%202%20heatmap%20%236.png" width="250" height="80">
+       -> install.packages("RColorBrewer")
+       -> library(RColorBrewer)
+       
+       -> display.brewer.all() #displaying color schemes
+       -> heatmap(data, col=brewer.pal(9, "Blues")) #unpreserved column order
+       -> heatmap(data, Colv=NA, col=brewer.pal(9, "Blues")) #preserved column order
+       
+       <i>OR</i>
+       
+       -> coul <- colorRampPalette(brewer.pal(8, "PiYG"))(25)
+       -> heatmap(data, scale="column", col = coul)
+       
+  - other features
+  heatmap(data, Colv = NA, Rowv = NA, scale="column", col = coul, xlab="variable", ylab="car", main="heatmap") #custom main and axis titles
+  heatmap(data, scale="column", cexRow=1.5, labRow=paste("new_", rownames(data),sep=""), col= colorRampPalette(brewer.pal(8, "Blues"))(25)) #adding new_ to y labels
 </pre>
+
+
 
 ### Implementation
