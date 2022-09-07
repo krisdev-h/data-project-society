@@ -113,5 +113,19 @@ colors to visualize the values of the given matrix
 </pre>
 
 
-
 ### Implementation
+First, I created a 10 column by 9 row excel table as values for our heatmap to visualize. I initially tried logging the highest valued digits in a "D", "P", or "S" shape throughout the table, with the lowest values contrasting in areas outside of the letters. Then I opened and attached the file to the program.
+
+<img src="https://github.com/krisdev-h/data-project-society-logo/blob/1caa192f29b6e984c67b55469df8958c9ec9b9f2/Implementation%20Step%201%20excel.jpg" width="500" height="130">
+
+After coding a color palette of blue, gold, and white I called it as the color of the heatmap and saw what was generated. As you can see there is a slight letter "D" that appears in dark blue (less common values) but the "P" and "S" are indistinguishable within the heatmap. There is a dendogram that is visible and axis titles and a heatmap title can be added.
+
+<img src="https://github.com/krisdev-h/data-project-society-logo/blob/015c34ca84b63946dc6aa115a4cd6765f4e297b7/Implementation%20Step%201%20overview.jpg" width="800" height="400">
+
+
+### Refining
+In order to refine my model I wanted to add axis and a main heatmap title to the visualization, remove the dendogram, extend the "D" letter towards the bottom of the heatmap, and make sure that darker values/less common values are represented where "P" and "S" are supposed to be visible in the heatmap. 
+
+<img src="https://github.com/krisdev-h/data-project-society-logo/blob/030f3076b03f93194e0a3b9ca5e4a14f3bdcc3f8/Refining%20Step%201%20Overview.jpg" width="700" height="400">
+
+Here I noticed a yellow value that stuck out towards the left side of the "D" letter, and made corresponding row 7 and column 3 more similar to make sure that value was made darker. I continued this process to try and make the other letters appear. 
