@@ -1,6 +1,14 @@
 # Data Project Society Logo
 
-Hi there! For my first GitHub project I wanted to explore my interest in RStudio visualization. Therefore, this repository will describe my process in brainstorming ideas and generating a RStudio heat map for the Data Project Society's (DPS) logo.
+<pre>
+<b>
+Hi there! Please see below my first exploratory Github project. Although I didn't end up achieving my 
+result of creating a logo using the heatmap function, I learned a lot about Github implementation procedures, 
+scoping out the feasibility of my visualizations through prior research, and different statistical 
+visualization methods.
+
+</pre>
+For my first Github project I wanted to explore my interest in RStudio visualization. Therefore, this repository will describe my process in brainstorming ideas and generating a RStudio heat map for the Data Project Society's (DPS) logo.
 
 With the help of a Data Science Professor and fellow students, we are creating the Data Project Society this year as a non-intimidating community for anyone interested in exploring Data Science. I thought that this would be a good introduction into visualization and help develop my technical expertise, which is essential for guiding others next year.
 
